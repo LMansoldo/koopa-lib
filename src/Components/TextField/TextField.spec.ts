@@ -1,4 +1,4 @@
-import { render } from '@testing-library/svelte';
+import { render, screen } from '@testing-library/svelte';
 import '@testing-library/jest-dom'
 import TextField from './TextField.svelte';
 
@@ -22,5 +22,26 @@ describe('TextField', () => {
 			} });
 
 		expect(getByDisplayValue('default value')).toBeInTheDocument();
-	})
+	});
+
+	test('should return typed value', () => {
+		const {getByDisplayValue} = render(TextField, { 
+			props: { 
+				value: 'value'
+			} });
+
+		expect(getByDisplayValue('value')).toBeInTheDocument();
+	});
+
+	test('should return erase button when component receive value', () => {
+		render(TextField, { 
+			props: { 
+				value: 'value'
+			} 
+		});
+
+		const closeButton = screen.getByRole('button');
+		expect(closeButton).toBeInTheDocument();
+	});
+	
 });
