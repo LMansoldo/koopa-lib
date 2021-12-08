@@ -11,6 +11,14 @@
 			defaultValue={defaultValue}
 			placeholder={placeholder}
 		/>
+		{#if value}
+			<button
+				class=""
+				type="button"
+			>
+				x
+			</button>
+		{/if}
 </div>
 
 <script>
