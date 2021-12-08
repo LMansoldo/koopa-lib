@@ -43,5 +43,16 @@ describe('TextField', () => {
 		const closeButton = screen.getByRole('button');
 		expect(closeButton).toBeInTheDocument();
 	});
+
+	test('should hide erase button when component is empty', () => {
+		render(TextField, { 
+			props: { 
+				value: ''
+			} 
+		});
+
+		const closeButton = screen.queryByRole('button');
+		expect(closeButton).not.toBeInTheDocument();
+	});
 	
 });
