@@ -54,5 +54,16 @@ describe('TextField', () => {
 		const closeButton = screen.queryByRole('button');
 		expect(closeButton).not.toBeInTheDocument();
 	});
+
+	test('should return text with mask', () => {
+		const {getByDisplayValue} = render(TextField, { 
+			props: { 
+				value: '14573355731',
+				mask: '999.999.999-99',
+			} 
+		});
+
+		expect(getByDisplayValue('145.733.557-31')).toBeInTheDocument();
+	});
 	
 });
