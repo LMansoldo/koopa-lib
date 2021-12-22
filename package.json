@@ -26,8 +26,10 @@
     "@storybook/addon-links": "^6.4.8",
     "@storybook/addon-svelte-csf": "^1.1.0",
     "@storybook/svelte": "^6.4.8",
+    "@testing-library/dom": "^7.31.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/svelte": "^3.0.3",
+    "@testing-library/user-event": "^13.5.0",
     "@tsconfig/svelte": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
@@ -61,7 +63,7 @@
     "setupFilesAfterEnv": [
       "@testing-library/jest-dom/extend-expect"
     ],
-		"testEnvironment": "jsdom",
+    "testEnvironment": "jsdom",
     "transform": {
       "^.+\\.js$": "babel-jest",
       "^.+\\.svelte$": [

@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/svelte';
+import { getByLabelText, render, screen, fireEvent } from '@testing-library/svelte';
 import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 import TextField from './TextField.svelte';
 
 describe('TextField', () => {
@@ -54,16 +55,4 @@ describe('TextField', () => {
 		const closeButton = screen.queryByRole('button');
 		expect(closeButton).not.toBeInTheDocument();
 	});
-
-	test('should return text with mask', () => {
-		const {getByDisplayValue} = render(TextField, { 
-			props: { 
-				value: '14573355731',
-				mask: '999.999.999-99',
-			} 
-		});
-
-		expect(getByDisplayValue('145.733.557-31')).toBeInTheDocument();
-	});
-	
 });

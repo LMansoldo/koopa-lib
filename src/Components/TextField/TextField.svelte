@@ -6,8 +6,8 @@
 			id={id}
 			name={textFieldName}
 			class="" 
-			type={type}
-			value={handleValues()}
+			bind:value={value}
+			on:input={(e) => handleValues(e)}
 			defaultValue={defaultValue}
 			placeholder={placeholder}
 		/>
@@ -22,57 +22,27 @@
 </div>
 
 <script>
+		import { onMount } from 'svelte';
+
     export let id = 0;
     export let textFieldName = '';
-    export let type = 'text';
-    export let value = null;
+    export let value = "";
     export let defaultValue = '';
     export let placeholder = '';
-		export let mask = null;
-		export let maskedValue = '';
+
+		onMount(() => {
+			if(defaultValue) {
+				value = defaultValue;
+			}
+		});
 		
-		const testIfStringHasSpecialChar = string => {
-			return /[!@#$%^&*(),.?":{}|<>\-]/.test(string);
-		}
+		function returnRefreshedValue(inputValue) {
+			if(inputValue === "") return defaultValue || "";
+			return inputValue;
+		};
 
-		const incrementMaskedValue = (scopedValue, scopedMask = []) => {
-			let maskedValue = [];
-			let specialCharCounter = 0;
-
-			const selectBetweenSpecialCharAndString = (maskItem, scopedItem, index) => {
-				if(testIfStringHasSpecialChar(maskItem)){
-					specialCharCounter++
-					return maskItem;
-				} else {
-					return scopedItem[index-specialCharCounter]
-				}
-			};
-
-			scopedMask.filter((item, index) => {
-				maskedValue = [
-					...maskedValue,
-					selectBetweenSpecialCharAndString(item, scopedValue, index),
-				]
-			});
-			
-			return maskedValue.toString().replaceAll(",", "");
-			
-		}
-
-		const formatReceivedValue = () => {
-			const fragmentedValue = [...value];
-			const fragmentedMask = [...mask];
-			return incrementMaskedValue(fragmentedValue, fragmentedMask); 
-		}
-
-		const checkIfHasMask = () => {
-			if(mask) return maskedValue = formatReceivedValue();
-			return value;
-		}
-
-		const handleValues = () => {
-			if(defaultValue) return defaultValue;
-			return checkIfHasMask();
+		function handleValues(element) {
+			value = returnRefreshedValue(element.target.value);
 		}
 
 </script>
