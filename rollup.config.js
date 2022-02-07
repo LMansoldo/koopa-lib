@@ -39,13 +39,25 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		typescript({ sourceMap: !production }),
 		svelte({
-			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
 			}
 		}),
+		postcss({
+      extract: true,
+      minimize: true,
+      use: [
+        [
+          "sass",
+          {
+            includePaths: ["./node_modules", "./node_modules/bulma", "./src"],
+          },
+        ],
+      ],
+    }),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({ output: 'bundle.css' }),
