@@ -10,6 +10,6 @@ module.exports = {
   ],
   "framework": "@storybook/svelte",
   "svelteOptions": {
-    "preprocess": require("../svelte.config.js").preprocess
+    "preprocess": require("../svelte.config.cjs").preprocess
   }
 }
